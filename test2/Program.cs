@@ -30,12 +30,6 @@ namespace test2
 
         }
 
-
-       
-
-
-
-
         public static string Stb(string word)
         {
 
