@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace test2
 {
+    /// <summary>
+    /// Напишите класс с именем User, который используется для вычисления суммы, 
+    /// которую пользователь будет продвигать по системе ранжирования,аналогичной той, которую использует Codewars.
+    /// </summary>
     public class User
     {
         public int rank  = -8;
@@ -15,9 +19,9 @@ namespace test2
             if (kataRank > 8 || kataRank < -8 || kataRank == 0) throw new ArgumentException("Invalid number", "Rank kata");
             try
             {
-                if (rank - kataRank == -1 && rank > kataRank && rank != 8 ||  kataRank == -1 && rank == 1) { IncRank(1);return; }
-                if (rank > kataRank || rank > 8) return;
-                if (rank == kataRank) { IncRank(3); return; }
+                if (rank - kataRank == -1 && rank > kataRank && rank != 8||  kataRank == -1 && rank == 1) { IncRank(1);return; }
+                if (rank > kataRank || rank == 8) return;
+                if (rank == kataRank ) { IncRank(3); return; }
                 var diffRank = rank;
                 var diffCounter = 0;
                 while (diffRank != kataRank)
@@ -42,11 +46,14 @@ namespace test2
                 progress -= 100;
                 switch (rank)
                 {
-                    case 8: progress = 0; break;
+                    case 7: progress = 0; rank += 1; break;
                     case -1: rank = 1; break;
-                    default: rank += 1; ; break;
+                    default: rank += 1; break;
                 }                   
             }
         }
     }
 }
+
+
+

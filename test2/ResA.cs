@@ -62,6 +62,43 @@ namespace test2
                 root = (root + square / root) / 2;
             return root;
         }
+
+
+        // проверить правильность расстановки скобок пр.{()[]} или ({[]}) true ; {()(} false
+        public static bool CheckBrackets(string braces)
+        {
+
+            bool bol = false;
+            List<char> myList = braces.ToList(); Stack<char> myStack = new Stack<char>();
+            for (int i = 0; i < myList.Count; i++)
+            {
+
+                if (myList[i] == '{' || myList[i] == '[' || myList[i] == '(')
+                {
+
+                    myStack.Push(myList[i]);
+
+                }
+                else
+                {
+                    if (myStack.Count == 0)
+                    {
+                        bol = false; break;
+                    }
+                    var cc = myStack.Pop();
+                    if (cc + 0 == myList[i] - 2 | cc + 0 == myList[i] - 1)
+                    {
+                        bol = true;
+                    }
+                }
+            }
+
+            return bol;
+        }
+
+
+
+
     }
 
 
