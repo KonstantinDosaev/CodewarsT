@@ -42,7 +42,7 @@ class ParserClient
 }
 
 
-interface IParser<T> 
+interface IParser< out T> 
 {
     public T Parse(string value);
 }
