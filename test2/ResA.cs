@@ -37,6 +37,31 @@ namespace test2
             //return new string(str.Where(c => !Char.IsDigit(c)).ToArray());
             //return string.Concat(str.Where(c => !char.IsNumber(c)));
         }
+
+
+        // получить следующее идеальное квадратное число(sqrt(n) также является целым числом)
+
+        public static long FindNextSquare(long num)
+        {
+            long r = (long)Math.Sqrt(num);
+            if (r * r == num) return -1;
+            return ((r + 1) * (r + 1));
+
+
+        }
+
+        //вывести корень из deccimal не уходя в duble
+
+        private static decimal SquereR(decimal square)
+        {
+            if (square < 0) return 0;
+
+            decimal root = square / 3;
+            int i;
+            for (i = 0; i < 35; i++)
+                root = (root + square / root) / 2;
+            return root;
+        }
     }
 
 

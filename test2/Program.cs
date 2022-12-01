@@ -26,14 +26,28 @@ namespace test2
 
             //Console.WriteLine(ArrayPlusArray(new int[] { 1, 2, 3 }, new int[] { 4, 5, 6 }));
 
-            //long num = 1082077497969070681;
+            User user= new User();
+            user.rank = -4;
+            user.incProgress(8);
+            //user.incProgress(-5);
+
+            user.incProgress(7);
+            Console.WriteLine(user.progress);
+            Console.WriteLine(user.rank);
 
 
-            //Console.WriteLine(Math.Sqrt(num)); Console.WriteLine((Math.Sqrt(num)+1) * ((Math.Sqrt(num) +1)));
-            ////Console.WriteLine(q);
-            Console.WriteLine(FindNextSquare(5049531132362809));
-            //Console.WriteLine(Math.Sqrt(1082077497969070681));Console.WriteLine(Math.Sqrt(4503599761588225));
-
+            //user.incProgress(-7);
+            //Console.WriteLine(user.progress);
+            //user.incProgress(-6);
+            //Console.WriteLine(user.rank);
+            //Console.WriteLine(user.progress);
+            //user.incProgress(-5);
+            //user.incProgress(-5);
+            //Console.WriteLine(user.rank);
+            //Console.WriteLine(user.progress);
+            //user.incProgress(-9);
+            //Console.WriteLine(user.progress);
+            //Console.WriteLine(user.rank);
         }
 
         //public static string Stb(string word)
@@ -41,41 +55,8 @@ namespace test2
 
 
         //}
-        
-
-        public static long FindNextSquare(long num)
-        {
-            //if (num == 4503599627370496 && num == 5049531132362809) return -1;
-
-            long r = (long)Math.Sqrt(num);
-
-            Console.WriteLine(r);
-            Console.WriteLine((r+1)*(r+1));
-            decimal defNum = num;
-                 
-            var sq = SquereR(num);
-            Console.WriteLine(sq);
-            
-            if (sq - Math.Truncate(sq) != 0) return -1;
-            var t = (sq+ 1.0M) * (sq +1.0M);
-            return (long)(t);
-            
-
-        }
-        static decimal SquereR(decimal square)
-        {
-            if (square < 0) return 0;
-
-            decimal root = square / 3;
-            int i;
-            for (i = 0; i < 35; i++)
-                root = (root + square / root) / 2;
-            return root;
-        }
-
     }
-    //using System;
-    //using System.Text.RegularExpressions;
+
 
 
 
