@@ -97,7 +97,12 @@ namespace test2
         }
 
 
+        //удалить все эллементы массива b из a
+        public static int[] ArrayDiff(int[] a, int[] b)
+        {
 
+            return a.Where(x => !b.Contains(x)).ToArray();
+        }
 
     }
 
