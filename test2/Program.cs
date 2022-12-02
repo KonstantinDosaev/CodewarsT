@@ -25,29 +25,18 @@ namespace test2
             // Console.WriteLine(Res.GetNames(new int[,] { { 7, 1, 5, 8 }, { 2, 1, 4, 9 }, { 3, 2, 4, 7 } }));
 
             //Console.WriteLine(ArrayPlusArray(new int[] { 1, 2, 3 }, new int[] { 4, 5, 6 }));
+            int[,] test = Spiral.Spiralize(8);
+            for (int i = 0; i < test.GetLength(0); i++)
+            {
+                for (int j = 0; j < test.GetLength(1) ; j++)
+                {
+                    Console.Write(test[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
 
-            User user= new User();
-            user.rank = -4;
-            user.incProgress(8);
-            //user.incProgress(-5);
 
-            user.incProgress(7);
-            Console.WriteLine(user.progress);
-            Console.WriteLine(user.rank);
-
-
-            //user.incProgress(-7);
-            //Console.WriteLine(user.progress);
-            //user.incProgress(-6);
-            //Console.WriteLine(user.rank);
-            //Console.WriteLine(user.progress);
-            //user.incProgress(-5);
-            //user.incProgress(-5);
-            //Console.WriteLine(user.rank);
-            //Console.WriteLine(user.progress);
-            //user.incProgress(-9);
-            //Console.WriteLine(user.progress);
-            //Console.WriteLine(user.rank);
+;
         }
 
         //public static string Stb(string word)
