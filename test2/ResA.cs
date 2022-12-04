@@ -110,6 +110,15 @@ namespace test2
         {
             return new string(word.ToLower().Select(w => word.ToLower().Count(i => i == w) == 1 ? '(' : ')').ToArray());
         }
+
+
+        //сумма цифр многозначного числа покаа не останится  однозначное 123 => 1+2+3=6
+        public static int DigitalRoot(long n)
+        {
+            while (n > 9) { n = n.ToString().Select(c => c - '0').Aggregate((x, y) => x + y); }
+
+            return (int)Convert.ToInt64(n);
+        }
     }
 
 

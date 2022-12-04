@@ -18,7 +18,7 @@ namespace test2
         static void Main(string[] args)
         {
 
-            Console.WriteLine(DuplicateEncode("eyeedG)meOeeeben"));
+            Console.WriteLine(DigitalRoot(123));
             //foreach (var VARIABLE in ArrayDiff(new int[] { 1,2,2 }, new int[] { 2}))
             //{
             //    Console.WriteLine(VARIABLE);
@@ -32,20 +32,18 @@ namespace test2
             ;
         }
 
-        public static string DuplicateEncode(string word)
-        {
-            //word = word.ToLower();
-            //var y = string.Join("", word.GroupBy(x => x).Where(x => x.Count() > 1).Select(x => x.Key));
-            //string result = "";
-            //foreach (var item in word) word = y.Contains(item) ? result += ")" : result += "(";
-            return new string(word.ToLower().Select(w => word.ToLower().Count(i=> i == w)==1 ? ')' : '(').ToArray());
-
-        }
 
         //public static string Stb(string word)
         //{
 
         //}
+        //сумма цифр многозначного числа покаа не останится  однозначное 123 => 1+2+2=5
+        public static int DigitalRoot(long n)
+        {
+            while(n > 9){ n = n.ToString().Select(c => c - '0').Aggregate((x, y) => x + y); }
+             
+            return (int)Convert.ToInt64(n);
+        }
     }
 
 
