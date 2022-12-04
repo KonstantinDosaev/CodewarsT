@@ -71,7 +71,7 @@ namespace test2
             if (s == "")
                 return " ";
 
-            // вместо кучи конверции int.Parse(match.Value)
+            
 
             var sb = s.Split().Select(p => new Regex(@"(\d)+").Replace(p, Convert.ToChar(int.Parse(new Regex(@"(\d)+").Match(p).Value)).ToString())).
                 Select((p) =>

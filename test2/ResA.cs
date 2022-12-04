@@ -104,6 +104,12 @@ namespace test2
             return a.Where(x => !b.Contains(x)).ToArray();
         }
 
+        // если в строке символ повторяется > 1 раза => )  : ( .пр addp => ())(
+
+        public static string DuplicateEncode(string word)
+        {
+            return new string(word.ToLower().Select(w => word.ToLower().Count(i => i == w) == 1 ? '(' : ')').ToArray());
+        }
     }
 
 
