@@ -18,11 +18,12 @@ namespace test2
         static void Main(string[] args)
         {
 
-            Console.WriteLine(DigitalRoot(123));
-            //foreach (var VARIABLE in ArrayDiff(new int[] { 1,2,2 }, new int[] { 2}))
-            //{
-            //    Console.WriteLine(VARIABLE);
-            //}
+            //Console.WriteLine(DigitalRoot(123));
+            foreach (var item in Pin.GetPINs("9173"))
+            {
+                Console.WriteLine(item+"\t");
+            }
+            
             // Console.WriteLine(Res.GetNames(new int[,] { { 7, 1, 5, 8 }, { 2, 1, 4, 9 }, { 3, 2, 4, 7 } }));
 
             //Console.WriteLine(ArrayPlusArray(new int[] { 1, 2, 3 }, new int[] { 4, 5, 6 }));
@@ -37,13 +38,7 @@ namespace test2
         //{
 
         //}
-        //сумма цифр многозначного числа покаа не останится  однозначное 123 => 1+2+2=5
-        public static int DigitalRoot(long n)
-        {
-            while(n > 9){ n = n.ToString().Select(c => c - '0').Aggregate((x, y) => x + y); }
-             
-            return (int)Convert.ToInt64(n);
-        }
+
     }
 
 
