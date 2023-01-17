@@ -18,20 +18,20 @@ namespace test2
         static void Main(string[] args)
         {
 
-            //Console.WriteLine(DigitalRoot(123));
-            foreach (var item in Pin.GetPINs("9173"))
-            {
-                Console.WriteLine(item+"\t");
-            }
-            
-            // Console.WriteLine(Res.GetNames(new int[,] { { 7, 1, 5, 8 }, { 2, 1, 4, 9 }, { 3, 2, 4, 7 } }));
+            //Console.WriteLine(ResB.GetSum(-3,2));
+            //foreach (var item in ResB.RemoveSmallest(new List<int> { 5, 3, 2, 1, 4 }))
+            //{
+            //    Console.WriteLine(item + "\t");
+            //}
+            Console.WriteLine(ResB.UniqueInOrder("AAAABBBCCDAABBB"));
 
-            //Console.WriteLine(ArrayPlusArray(new int[] { 1, 2, 3 }, new int[] { 4, 5, 6 }));
-
+            //Console.WriteLine(ResB.RemoveSmallest(new List<int> { 1, 2, 3, 1, 1 }, new List<int> { 2, 3, 1, 1 }));
 
 
-            ;
+
         }
+
+
 
 
         //public static string Stb(string word)
