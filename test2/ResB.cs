@@ -143,23 +143,34 @@ namespace test2
             return temp1 - temp2;
         }
 
-        public static IEnumerable<T> UniqueInOrder<T>(IEnumerable<T> iterable)
+        static int IsSolved(int[,] board)
         {
-
-            List<T> j = new List<T>();
-            //j.Add(iterable.FirstOrDefault<T>(defaultValue:" "));
-            foreach (var item in iterable)
+            int[] hor = new int[3];
+            int[] vert = new int[3];
+            int n = 0;
+            for (int i = 0; i < 3; i++)
             {
-                if (j.Count == 0||!Equals(item, j.Last()))
+
+                for (int j = 0; j < 3; j++)
                 {
-                    j.Add(item);
+                    hor[j] = board[i, j];
+                    vert[j] = board[j, i];
+                    if (board[i, j] == 0) n++;
                 }
+
+                if (hor.Distinct().Count() == 1 && hor[i] != 0)
+                    return hor[i];
+
+
+                if (vert.Distinct().Count() == 1 && vert[i] != 0)
+                    return vert[i];
+
             }
-            return (IEnumerable<T>)j;
 
-            //var i = iterable.Where(i => i != iterable.GetEnumerator().MoveNext());
-            //return (IEnumerable<T>)f;
+            if ((board[0, 0] == board[1, 1] && board[0, 0] == board[2, 2] || board[0, 2] == board[1, 1] && board[0, 2] == board[2, 0]) && board[1, 1] != 0)
+                return board[1, 1];
 
+            return n > 1 ? -1 : 0;
         }
     }
 }
