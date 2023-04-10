@@ -19,19 +19,25 @@ namespace test2
         {
 
             //Console.WriteLine(ResB.GetSum(-3,2));
-            //foreach (var item in ResB.RemoveSmallest(new List<int> { 5, 3, 2, 1, 4 }))
+
+
+
+            //Console.WriteLine(ResB.RoundUp(10, new int[] { 1, 2, 4, 8, 16, 32 }));
+
+            Console.WriteLine(Regex.Match("", ResB.MultipleOf7()) + $"\t num   ");
+
+         
+
+            //for (int i = 0; i < 100; i++)
             //{
-            //    Console.WriteLine(item + "\t");
+
+
+            //    //Console.WriteLine(ResB.MultipleOf7(Convert.ToString(i,2)) + $"\t num   {i}");
+            //    Console.WriteLine(Regex.Match(Convert.ToString(i, 2), ResB.MultipleOf7()) + $"\t num   {i}");
             //}
-            Console.WriteLine(ResB.UniqueInOrder("AAAABBBCCDAABBB"));
-
-            //Console.WriteLine(ResB.RemoveSmallest(new List<int> { 1, 2, 3, 1, 1 }, new List<int> { 2, 3, 1, 1 }));
-
 
 
         }
-
-
 
 
         //public static string Stb(string word)

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace test2
@@ -35,7 +38,7 @@ namespace test2
         }
 
 
-        // сумма чисел впрмежутке между двумя заданными
+        // сумма чисел в промежутке между двумя заданными
         public static int GetSum(int a, int b)
         {
             var result = a;
@@ -172,5 +175,141 @@ namespace test2
 
             return n > 1 ? -1 : 0;
         }
+
+        public static int SumOfMinimums(int[,] numbers)
+        {
+            var result = 0;
+            for (int i = 0; i < numbers.GetLength(0); i++)
+            {
+                var temp = numbers[i, 0];
+                for (int j = 1; j < numbers.GetLength(1); j++)
+                {
+                    
+                    if (temp > numbers[i, j]) temp = numbers[i, j];
+                }
+                result += temp;
+            }
+            return result;
+        }
+
+        public static int[] RoundUp(int number, int[] list)
+        {
+            var temp = new int[list.Length];
+            for (int i = 0; i < list.Length; i++)
+            {
+                temp[i] = list[i] - number;
+            }
+
+            if (temp.Length == 0) return Array.Empty<int>();
+
+            int les = temp.Where(l => l < 0).DefaultIfEmpty(number + 1).Max();
+            int mor = temp.Where(m => m > 0).DefaultIfEmpty(number - 1).Min();
+            if (Math.Abs(les) == mor)
+            {
+                return list.Where(l => l == les + number || l == mor + number).ToArray();
+            }
+
+            return Math.Abs(les) > mor ? new[] {mor + number } : new[] { les + number };
+        }
+
+        public static int MrOdd(string str)
+        {
+            //var t = str.GroupBy(g => g).Where(w => w.Key =='d' || w.Key == 'o').Min()!.Count();
+           
+            var list = new List<string>();
+
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (str[i] == 'o')
+                    list.Add(new string("o"));
+                if (str[i] == 'd')
+                {
+                    var temp = list.FirstOrDefault(w => w.Length < 3);
+                    var t = list.IndexOf(temp);
+                    if (t != -1)
+                     list[t] = temp.Insert(temp.Length, str[i].ToString());
+                }
+            }
+            return list.Count(w => w.Length == 3);
+        }
+
+        public static string[][] VolleyballPositions(string[][] formation, int k)
+        {
+            Console.WriteLine(1000%6 +6);
+            if (k > 6)
+                k = k % 6 + 6;
+            for (int i = 0; i < k; i++)
+            {
+                (formation[0][1], formation[1][0]) = (formation[1][0], formation[0][1]);
+                (formation[0][1], formation[3][0]) = (formation[3][0], formation[0][1]);
+                (formation[0][1], formation[2][1]) = (formation[2][1], formation[0][1]);
+                (formation[0][1], formation[3][2]) = (formation[3][2], formation[0][1]);
+                (formation[0][1], formation[1][2]) = (formation[1][2], formation[0][1]);
+            }
+            return formation;
+        }
+
+        public static int solveExpression(string expression)
+        { 
+
+            int missingDigit = -1;
+            var op = new Regex(@"-?\?*\d*\?*\d*?\d*\?*\d*(\?|\d)+(\-|\*|\+)?").Match(expression);
+            var opp = op.Value[op.Length - 1];
+
+            for (int i = 0; i < 10; i++)
+            {
+               if (!expression.Contains(Convert.ToString(i)))
+               {
+                   var replace = expression.Replace("?", (i).ToString());
+                    replace = new Regex(@"\d+-{1}\d+").Match(replace).Value.Length==0 ? replace : replace.Replace("-"," ");
+                   var numbers = new Regex(@"-?\d+").Matches(replace);
+                   var temp = opp switch
+                   {
+                       '+' => Convert.ToInt32(numbers[0].Value) + Convert.ToInt32(numbers[1].Value),
+                       '-' => Convert.ToInt32(numbers[0].Value) - Convert.ToInt32(numbers[1].Value),
+                       '*' => Convert.ToInt32(numbers[0].Value) * Convert.ToInt32(numbers[1].Value),
+                       _ => 0
+                   };
+
+                   if (temp == Convert.ToInt32(numbers[2].Value) && numbers.Select(s=>s.Value.Replace("-","")).Count(w => w.Length>1 && w[0] == '0')==0)
+                   {
+                       return i;
+                   }
+               }
+
+            }
+            
+
+
+            //string dg = mat[0].Value;
+            //Console.WriteLine(Convert.ToInt32(mat[0].Value));
+            return missingDigit;
+        }
+
+        public static int CircleSlash(int n)
+        {
+            var num = 2;
+
+            while (num<n)
+            {
+                num = num * 2;
+            }
+
+            if (num == n)
+                return 1;
+
+            var res = n - (num-1- n);
+            return res;
+        }
+
+        public static string MultipleOf7()
+        {
+            // return Regex.Replace(input, @"\b\d+\b", m => Convert.ToByte(m.Value, 2).ToString());
+            
+
+          return  new Regex(@"^(0|(^$)|1((0(01|111)*(00|110))*(1|0(01|111)*10))(01*0(1(10|000)*(11|0(000)*01))*(0|1(10|000)*0(000)*1))*1)*$").ToString();
+        }
+
+
     }
 }
