@@ -302,12 +302,10 @@ namespace test2
             return res;
         }
 
+        //двоичные числа кратные семи
         public static string MultipleOf7()
         {
-            // return Regex.Replace(input, @"\b\d+\b", m => Convert.ToByte(m.Value, 2).ToString());
-            
-
-          return  new Regex(@"^(0|(^$)|1((0(01|111)*(00|110))*(1|0(01|111)*10))(01*0(1(10|000)*(11|0(000)*01))*(0|1(10|000)*0(000)*1))*1)*$").ToString();
+            return  new Regex(@"^(0|(^$)|1((0(01|111)*(00|110))*(1|0(01|111)*10))(01*0(1(10|000)*(11|0(000)*01))*(0|1(10|000)*0(000)*1))*1)+$").ToString();
         }
 
 
