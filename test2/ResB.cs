@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -58,45 +60,86 @@ namespace test2
             return result;
         }
 
-        //public static bool Millipede(string[] arr)
-        //{
-        //    //List<string> myList = arr.ToList();
-        //    //myList.Sort();
-        //    //int i = 0;
-        //    //bool bl = true;
-        //    //while (bl)
-        //    //{
-        //    //    bl = false;
-        //    //    for (int j = 1; j < myList.Count; j++)
-        //    //    {
-        //    //        if ((myList[i])[myList[i].Length - 1] == (myList[j])[0] || (myList[j])[myList[j].Length - 1] == (myList[i])[0])
-        //    //        {
-        //    //            string temOne = myList[i];
-        //    //            string temTwo = myList[j];
-        //    //            if((myList[j])[myList[j].Length - 1] == (myList[i])[0]) myList.Add(temTwo + temOne);
-        //    //            else myList.Add(temOne + temTwo);
-        //    //            myList.Remove(temOne);
-        //    //            myList.Remove(temTwo);
-        //    //            bl = true;
-        //    //            break;
-        //    //        }
-        //    //    }
-        //    //}
-        //    //if (arr.Contains(" ")) return false;
-        //    var one = arr.Select(o => o[0]);
-        //    var last = arr.Where(l => l.Length > 1).Select(l => l[^1]);
-        //    var result = one.Concat(last).GroupBy(r=>r).Select(r=> r.Count()).Where(r => r%2 != 0).ToArray();
-        //    var d = arr.Where(n => n.Length == 1).ToArray().Length;
-        //    Console.WriteLine(d);
-        //    if (arr.Where(n => n.Length == 1).ToArray().Length == arr.Length && one.Concat(last).GroupBy(r => r).ToArray().Length > 1) return false;
-        //    return result.Length <= 2;
-        //    //Console.WriteLine(result);
-        //    //foreach (var VARIABLE in result)
-        //    //{
-        //    //    Console.WriteLine(VARIABLE);
-        //    //}
-        //   // return true;
-        //}
+        public static bool Millipede(string[] arr)
+        {
+
+            //var one = arr.Where(w => w.Length == 1).Select(s => s[0]);
+            //var first = arr.Where(w => w.Length > 1).Select(s => s[0]).Concat(one);
+            //var last = arr.Where(w => w.Length > 1).Select(s => s[^1]).Concat(one);
+
+            //if ((arr.All(a => a.Length == 1) && arr.GroupBy(g => g).Count() != 1))
+            //    return false;
+
+            //var res = first.Count(c => !last.Contains(c)) + last.Count(c => !first.Contains(c));
+            //return arr.Count(c => c.Length > 1) == 1 ? res <= 1 : res <= 2;
+
+            //arr = arr.Distinct().ToArray();
+            
+            var myArr = arr.Where(w=> w[0] == w[^1]).Select(s=> s[0].ToString()).Concat(arr.Where(w => w[0] != w[^1])).OrderBy(o=>o);
+            
+            var one = myArr.Where(w => w.Length == 1).GroupBy(g=>g).Select(s=>s.Key).ToList();
+            var ar = myArr.Where(w => w.Length > 1).ToList();
+
+            if (ar.Count == 0)
+                return one.Count == 1;
+
+            int j = 0;
+            while (one.Count != 0 && j < ar.Count)
+            {
+                if (ar[j][0] == one[0][0])
+                {
+                    ar[j] = one[0] + ar[j];
+                    one.RemoveAt(0);
+                    j = 0;
+                    continue;
+                }
+
+                if (ar[j][^1] == one[0][0])
+                {
+                    ar[j] = ar[j] + one[0];
+                    one.RemoveAt(0);
+                    j = 0;
+                }
+
+                j++;
+            }
+            
+
+            foreach (var VARIABLE in ar)
+            {
+                Console.WriteLine(VARIABLE);
+            }
+
+           
+
+
+
+
+            for (int i = 1; i < ar.Count; i++)
+            {
+                if (ar[i][0] == ar[0][^1])
+                {
+                    ar[0] = ar[0] + ar[i];
+                    ar.RemoveAt(i);
+                    i = 0;
+                    continue;
+                }
+
+                if (ar[i][^1] == ar[0][0])
+                {
+                    ar[0] = ar[i] + ar[0];
+                    ar.RemoveAt(i);
+                    i = 0;
+                    continue;
+                }
+            }
+
+
+            return ar.Count == 1 && one.Count == 0;
+                
+
+
+        }
 
         public static int[] AddingShifted(int[][] arrayOfArrays, int shift)
         {
@@ -224,10 +267,10 @@ namespace test2
                     list.Add(new string("o"));
                 if (str[i] == 'd')
                 {
-                    var temp = list.FirstOrDefault(w => w.Length < 3);
-                    var t = list.IndexOf(temp);
+                    string? temp = list.FirstOrDefault(w => w.Length < 3);
+                    var t = list.IndexOf(temp!);
                     if (t != -1)
-                     list[t] = temp.Insert(temp.Length, str[i].ToString());
+                     list[t] = temp!.Insert(temp.Length, str[i].ToString());
                 }
             }
             return list.Count(w => w.Length == 3);
@@ -308,6 +351,141 @@ namespace test2
             return  new Regex(@"^(0|(^$)|1((0(01|111)*(00|110))*(1|0(01|111)*10))(01*0(1(10|000)*(11|0(000)*01))*(0|1(10|000)*0(000)*1))*1)+$").ToString();
         }
 
+        public static long NextBiggerNumber(long n)
+        {
+            var st = Convert.ToString(n);
 
+            for (int i = st.Length-1; i > 0; i--)
+            {
+                if (st[i] > st[i-1])
+                {
+                    var last = st.Skip(i).OrderBy(o => o).ToList();
+                    var first = st.Take(i).ToList();
+                    var ind = last.IndexOf(last.First(f => Convert.ToInt32(f) > Convert.ToInt32(first[^1])));
+
+                    (first[^1], last[ind]) = (last[ind] , first[^1]);
+                     
+                    st = new string(first.Concat(last).ToArray());
+
+                    break;
+                }
+            }
+
+            var result = Convert.ToInt64(st);
+
+            return result > n ? result : -1 ;
+
+        }
+
+
+        //
+        static int prevMatches;
+        static int numArr;
+        static List<int> overNum = null!;
+        static bool lastNum;
+        static int indexOne;
+        static int indexTwo;
+        
+        public static int[] TryToGuess(int matches)
+        {
+            if (matches == -1)
+            {
+                prevMatches = 0;
+                numArr = -1;
+                overNum = new List<int>(); 
+                lastNum = false;
+                indexOne = -1;
+                indexTwo = -1;
+            }
+            
+            if (matches == 1 && overNum.Count < 2)
+            {
+                overNum.Add(numArr);
+            }
+
+            if (overNum.Count >= 2 )
+            {
+                if (overNum.Count == 2)
+                {
+                    overNum.AddRange(new[] { overNum[1], overNum[1] });
+                    return overNum.ToArray();
+                }
+
+                if (indexOne ==-1 || indexTwo == -1)
+                {
+                    
+                    switch (matches)
+                    {
+                        case 2:
+                            indexOne = overNum.IndexOf(overNum.Min());
+                            
+                            break;
+                        case 0:
+                            indexTwo = overNum.IndexOf(overNum.Min());
+                            
+                            break;
+                    }
+                    if (indexOne != -1 && indexTwo != -1)
+                    {
+                        overNum[indexOne] = overNum.Min();
+                        overNum[indexTwo] = overNum.Max();
+
+                        return overNum.ToArray();
+
+                    }
+                    for (int i = 1; i < overNum.Count; i++)
+                    {
+                        if (overNum[i - 1] < overNum[i])
+                        {
+                            (overNum[i], overNum[i - 1]) = (overNum[i - 1], overNum[i]);
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    if (matches == 2)
+                    {
+                        
+                        if (prevMatches == 3)
+                        {
+                            overNum[overNum.IndexOf(overNum.First(f => f != overNum[indexOne] && f != overNum[indexTwo]))]--;
+                            overNum[overNum.LastIndexOf(overNum.Last(f => f != overNum[indexOne] && f != overNum[indexTwo]))]++;
+                            lastNum = true;
+                        }
+                        else
+                        {
+                            for (int i = 0; i < overNum.Count; i++)
+                            {
+                                if (i != indexOne && i != indexTwo)
+                                {
+                                    overNum[i]++;
+                                }
+                            }
+                        }
+
+                        prevMatches = matches;
+                    }
+
+                    if (matches == 3)
+                    {
+                        if (!lastNum)
+                            overNum[overNum.IndexOf( overNum.First(f=>f != overNum[indexOne]&& f != overNum[indexTwo]))]++;
+                        else
+                            overNum[overNum.LastIndexOf(overNum.Last(f => f != overNum[indexOne] && f != overNum[indexTwo]))]++;
+
+                        prevMatches = matches;
+
+                    }
+                }
+                return overNum.ToArray();
+            }
+ 
+            numArr++;
+            
+            return new[] { numArr, numArr, numArr, numArr };
+
+        }
+        //
     }
 }

@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics.Metrics;
 using System.Globalization;
 using System.Linq;
+using System.Numerics;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -17,36 +19,37 @@ namespace test2
     {
         static void Main(string[] args)
         {
-
-            //Console.WriteLine(ResB.GetSum(-3,2));
-
-
-
-            //Console.WriteLine(ResB.RoundUp(10, new int[] { 1, 2, 4, 8, 16, 32 }));
-
-            Console.WriteLine(Regex.Match("", ResB.MultipleOf7()) + $"\t num   ");
-
-         
-
-            //for (int i = 0; i < 100; i++)
-            //{
-
-
-            //    //Console.WriteLine(ResB.MultipleOf7(Convert.ToString(i,2)) + $"\t num   {i}");
-            //    Console.WriteLine(Regex.Match(Convert.ToString(i, 2), ResB.MultipleOf7()) + $"\t num   {i}");
-            //}
-
-
+            Console.WriteLine(ResB.Millipede(new string[] { "exotic",
+                "trade",
+                "cable" }));
         }
 
 
-        //public static string Stb(string word)
-        //{
 
+        //public static void Play()
+        //{
+        //    int playersAttempts = 0;
+        //    int[] dig = new int[] { 0,1,2,9 };
+        //    int matches = -1;
+        //    int[] answer = new int[4];
+        //    answer = ResB.TryToGuess(matches);
+        //    while (!Enumerable.SequenceEqual(answer, dig) && playersAttempts < 100)
+        //    {
+        //        int result = 0;
+        //        for (int k = 0; k < 4; k++)
+        //            if (answer[k] == dig[k])
+        //                result++;
+        //        matches = result;
+        //        if (matches < 4)
+        //        {
+        //            playersAttempts++;
+        //            answer = ResB.TryToGuess(matches);
+        //        }
+        //    }
+        //    Console.WriteLine((playersAttempts, 16, "The code was {0}", string.Join("", dig)));
         //}
 
     }
-
 
 
 
