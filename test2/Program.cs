@@ -19,13 +19,18 @@ namespace test2
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(ResB.Millipede(new string[] { "exotic",
-                "trade",
-                "cable" }));
+            Console.WriteLine(ResC.Line(new Char[][]
+            {
+                "                      ".ToCharArray(),
+                "   +-------+          ".ToCharArray(),
+                "   |      +++---+     ".ToCharArray(),
+                "X--+      +-+   X     ".ToCharArray()
+            }));
+            Console.ReadKey();
         }
 
 
-
+        ////for ResB.TryToGuess
         //public static void Play()
         //{
         //    int playersAttempts = 0;

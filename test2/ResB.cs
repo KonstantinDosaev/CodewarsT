@@ -62,19 +62,6 @@ namespace test2
 
         public static bool Millipede(string[] arr)
         {
-
-            //var one = arr.Where(w => w.Length == 1).Select(s => s[0]);
-            //var first = arr.Where(w => w.Length > 1).Select(s => s[0]).Concat(one);
-            //var last = arr.Where(w => w.Length > 1).Select(s => s[^1]).Concat(one);
-
-            //if ((arr.All(a => a.Length == 1) && arr.GroupBy(g => g).Count() != 1))
-            //    return false;
-
-            //var res = first.Count(c => !last.Contains(c)) + last.Count(c => !first.Contains(c));
-            //return arr.Count(c => c.Length > 1) == 1 ? res <= 1 : res <= 2;
-
-            //arr = arr.Distinct().ToArray();
-            
             var myArr = arr.Where(w=> w[0] == w[^1]).Select(s=> s[0].ToString()).Concat(arr.Where(w => w[0] != w[^1])).OrderBy(o=>o);
             
             var one = myArr.Where(w => w.Length == 1).GroupBy(g=>g).Select(s=>s.Key).ToList();
@@ -103,17 +90,6 @@ namespace test2
 
                 j++;
             }
-            
-
-            foreach (var VARIABLE in ar)
-            {
-                Console.WriteLine(VARIABLE);
-            }
-
-           
-
-
-
 
             for (int i = 1; i < ar.Count; i++)
             {
@@ -134,11 +110,7 @@ namespace test2
                 }
             }
 
-
             return ar.Count == 1 && one.Count == 0;
-                
-
-
         }
 
         public static int[] AddingShifted(int[][] arrayOfArrays, int shift)
